@@ -3,7 +3,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class arrayAlt {
+public class ArrayAlt {
 	public static void main(String[] args) {
 		/*
 		 * From a given array find all pairs whose sum is a given number verilen bir
