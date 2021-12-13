@@ -50,9 +50,16 @@ protected void lehrerIslemler() {
 private void lehrerArama() {
 	
 	int giris=0;
-	System.out.println("Bitte RegistrationsNummer gibt ein: ");
+	System.out.println("Bitte Nummer gibt ein: ");
+	boolean dongu2=true;
 	giris=scan.nextInt();
+	
+	while(dongu2) {
+	for (int i = 0; i <lehrerList.size(); i++) {
+		if(i==giris-100) {
+	
 	lehrerList.get(giris-100).lehrerListeleme();
+	dongu2=false;
 	System.out.println("Andere Suchen Sie :1/2");
 	giris=scan.nextInt();
 	if (giris==1) {
@@ -60,12 +67,23 @@ private void lehrerArama() {
 	}else {
 		lehrerIslemler();
 	}
+
+	}
+	}if(giris-100>=lehrerList.size()) {
+	System.out.println("Boyle bir kayit yok.");
+	lehrerArama();
+	}
+	}
 	
 }
 
 private void LehrerListeleme() {
-	for (int i = 0; i < lehrerList.size(); i++) {
-		lehrerList.get(i).lehrerListeleme();
+	if (lehrerList.size()>0) {
+		for (int i = 0; i < lehrerList.size(); i++) {
+			lehrerList.get(i).lehrerListeleme();
+			}
+	}else {
+		System.out.println("Ogretmnen Listesi bostur.");
 	}
 }
 
@@ -74,10 +92,12 @@ public void lehrerEkle() {
 	int secim=0;
 	while(dongu) {
 	System.out.println("Vor-Nachname: ");
-	String lehrerName=scan.next();
+	scan.nextLine();// dummy 
+	lehrerName=scan.nextLine();
+	
 	
 	System.out.println("Fach: ");
-	String fach=scan.next();
+	fach=scan.next();
 	
 	System.out.println("Id Nummer: ");
 	lehrerIdNummer=scan.nextInt();

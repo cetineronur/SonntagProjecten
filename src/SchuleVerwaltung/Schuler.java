@@ -33,6 +33,7 @@ public class Schuler extends Islemler {
 			break;
 		case "Q":
 			System.out.println("Gule Gule");
+			System.exit(0);
 			break;
 			default:
 				System.out.println("yanlis tuslama yaptiniz:");
@@ -46,8 +47,15 @@ public class Schuler extends Islemler {
 
 		int giris=0;
 		System.out.println("Bitte Nummer gibt ein: ");
+		boolean dongu2=true;
 		giris=scan.nextInt();
-		schulerList.get(giris-100).schulerListeleme();
+		
+		while(dongu2) {
+		for (int i = 0; i <schulerList.size(); i++) {
+			if(i==giris-1) {
+		
+		schulerList.get(giris-1).schulerListeleme();
+		dongu2=false;
 		System.out.println("Andere Suchen Sie :1/2");
 		giris=scan.nextInt();
 		if (giris==1) {
@@ -57,23 +65,36 @@ public class Schuler extends Islemler {
 		}
 
 		}
-
+	}if(giris-1>=schulerList.size()) {
+		System.out.println("Boyle bir kayit yok.");
+		schulerArama();
+	}
+		}
+		
+	}
 		public void schulerListeleme() {
-		for (int i = 0; i < schulerList.size(); i++) {
-			schulerList.get(i).schulerListeleme();
-			}
+		if (schulerList.size()>0) {
+			for (int i = 0; i < schulerList.size(); i++) {
+				schulerList.get(i).schulerListeleme();
+				}
+		}else {
+			System.out.println("Ogrenci Listesi bostur.");
+		}
+			
 		}
 
 		public void schulerEkle() {
 
 			int secim=0;
 			while(dongu) {
-				System.out.println("Vor-Nachname: ");
-				schulerName=scan.next();
-
 				System.out.println("Id Nummer: ");
 				schulerIdNummer=scan.nextInt();
-
+				
+				scan.nextLine();// dummy 
+				System.out.println("Vor-Nachname: ");
+				schulerName=scan.nextLine();
+				
+		
 				System.out.println("wie alt : ");
 				schulerAlt=scan.nextInt();
 
@@ -100,14 +121,21 @@ public class Schuler extends Islemler {
 				while(dongu1) {
 				System.out.println("Bitte Nummer gibt ein: ");
 				giris=scan.nextInt();
-				schulerList.remove(giris-100);
-				System.out.println("baska silmek istiyor musunuz:1/2");
-				giris=scan.nextInt();
-				if (giris==1) {
-					dongu1=true;
-				}else {
-					dongu1=false;
+				for (int i = 0; i <=schulerList.size(); i++) {
+					if(i==giris-1) {
+						schulerList.remove(giris-1);
+						System.out.println("baska silmek istiyor musunuz:1/2");
+						giris=scan.nextInt();
+						if (giris==1) {
+							dongu1=true;
+						}else {
+							dongu1=false;
+						}
+					}
+					
 				}
+					System.out.println("boyle bir kayit yok.");
+					dongu=true;		
 			}
 
 		}

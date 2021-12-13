@@ -62,7 +62,7 @@ protected String schulerName;
 	
 	protected String clas;
 	
-	protected int nummer;
+	protected int nummer=0;
 	
 	protected  boolean dongu=true;
 	
@@ -83,9 +83,8 @@ protected String schulerName;
 		}
 	Islemler( int schulerIdNummer,String schulerName, int schulerAlt, String clas, int nummer) {
 		
-		
-		this.schulerName=schulerName;
 		this.schulerIdNummer=schulerIdNummer;
+		this.schulerName=schulerName;
 		this.schulerAlt=schulerAlt;
 		this.clas=clas;
 		this.nummer=nummer;
@@ -97,14 +96,15 @@ protected String schulerName;
 		}
 
 	protected void schulerListeleme() {
-		System.out.println("Vor-Nachname:"+schulerName+"\nId Nummer   : "+schulerIdNummer+"\nYas         : "+schulerAlt+"\nSinifi      : "+clas+"\nNumara      : "+nummer);
+		System.out.println("\nId Nummer   : "+schulerIdNummer+"\nVor-Nachname:"+schulerName+"\nYas         : "+schulerAlt+"\nSinifi      : "+clas+"\nNumara      : "+nummer);
 		System.out.println();
 	}
 
 	protected void lehrerListeleme() {
-		System.out.println("Vor-Nachname:"+lehrerName+"\nId Nummer: "+lehrerIdNummer+"\nYas: "+lehrerAlt+"\nFach: "+fach+"\nRegistrationsnummer: "+RegistrationsNummer+"\n");
+		System.out.println("Vor-Nachname       :"+lehrerName+"\nId Nummer          : "+lehrerIdNummer+"\nYas                : "+lehrerAlt+"\nFach               : "+fach+"\nRegistrationsnummer: "+RegistrationsNummer+"\n");
 		System.out.println();
 	}
+	
 	
 
 }
