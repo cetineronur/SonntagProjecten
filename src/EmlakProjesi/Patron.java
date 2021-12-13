@@ -46,6 +46,7 @@ public class Patron extends KalipHane {
 		while(dongu) {
 
 		ilanNo++;
+		
 		System.out.println("Evin metrekaresini giriniz:");	
 		metre=scan.nextInt();
 		
@@ -60,7 +61,7 @@ public class Patron extends KalipHane {
 		KalipHane kalip2 = new KalipHane(ilanNo,metre,odaSayisi,bulunduguKat,getFiyat());
 
 		list.add(kalip2);
-		
+	
 		System.out.println("Baska veri girmek istiyor musunuz?1/2");
 		int secim=scan.nextInt();
 		if (secim==1) {
