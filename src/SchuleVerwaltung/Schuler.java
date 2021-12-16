@@ -121,7 +121,7 @@ public class Schuler extends Islemler {
 				while(dongu1) {
 				System.out.println("Bitte Nummer gibt ein: ");
 				giris=scan.nextInt();
-				for (int i = 0; i <=schulerList.size(); i++) {
+				for (int i = 0; i <schulerList.size(); i++) {
 					if(i==giris-1) {
 						schulerList.remove(giris-1);
 						System.out.println("baska silmek istiyor musunuz:1/2");

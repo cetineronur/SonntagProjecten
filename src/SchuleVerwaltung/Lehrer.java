@@ -124,18 +124,27 @@ public void lehrerSil() {
 	boolean dongu1=true;
 	int giris=0;
 	while(dongu1) {
-		System.out.println("Bitte RegistrationsNummer gibt ein: ");
-		giris=scan.nextInt();
-		lehrerList.remove(giris-100);
-		System.out.println("baska silmek istiyor musunuz:1/2");
-		giris=scan.nextInt();
-		if (giris==1) {
-			dongu1=true;
+	System.out.println("Bitte Nummer gibt ein: ");
+	giris=scan.nextInt();
+	for (int i = 0; i <lehrerList.size(); i++) {
+		if(i==giris-100) {
+			lehrerList.remove(giris-100);
+			System.out.println("baska silmek istiyor musunuz:1/2");
+			giris=scan.nextInt();
+			if (giris==1) {
+				dongu1=true;
+			}else {
+				dongu1=false;
+			}
 		}else {
-			dongu1=false;
+			
 		}
-	}scan.close();
-	
+		
+	}
+		System.out.println("boyle bir kayit yok.");
+		dongu=true;		
+}
+
 }
 
 
