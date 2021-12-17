@@ -34,7 +34,7 @@ public class HastaneRunner extends VeriBankasi{
 		while(dongu2) {
 			for (int i = 0; i < hastaIDleri.size(); i++) {
 				if (secim==hastaIDleri.get(i)) {
-					System.out.println("Hasta ID         : "+hastaIDleri.get(i)+"\nHasta Adi       : "+hastaIsimleri.get(i)+"\nHasta Soyadi      :  "+hastaSoyIsimleri.get(i)+"\nYattigi Service : "+durumlar.get(i));
+					System.out.print("--------------Hasta Bilgiler-------------------"+"\nHasta ID        : "+hastaIDleri.get(i)+"\nHasta Adi       : "+hastaIsimleri.get(i)+"\nHasta Soyadi    : "+hastaSoyIsimleri.get(i)+"\nYatis Sebebi    : "+durumlar.get(i));
 				dongu2=false;
 				}
 			}
@@ -106,12 +106,13 @@ public class HastaneRunner extends VeriBankasi{
 		for (int i = 0; i < randevu.size(); i++) {
 			if (secim.equalsIgnoreCase(randevu.get(i))) {
 				System.out.println("randevunuz "+unvan+" bransi icin saat "+randevu.get(i)+" olarak kayit edilmistir.");
+				System.out.println();
 				VeriBankasi banka = new VeriBankasi(unvan,randevu.get(i));
 				randevuKayit.add(banka);
 				
 				System.out.println("------------------Randevu Bilgileri-----------------");
 				randevuKayit.get(i).listeleRandevu(unvan, randevu.get(i));
-				randevu.remove(i);
+				randevu.set(i, "Dolu");
 				menu1();
 				dongu1=false;
 				break;
