@@ -1,4 +1,4 @@
-package KrankenHause;
+package krankenHause;
 
 public class Durum {
 	private int aktuelDurum;

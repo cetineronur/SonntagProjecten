@@ -1,4 +1,4 @@
-package KrankenHause;
+package krankenHause;
 
 public class Hasta extends VeriBankasi {
 	

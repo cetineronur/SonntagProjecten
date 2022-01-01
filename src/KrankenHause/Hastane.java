@@ -1,4 +1,4 @@
-package KrankenHause;
+package krankenHause;
 
 public class Hastane extends VeriBankasi {
 	Doktor doktor= new Doktor();

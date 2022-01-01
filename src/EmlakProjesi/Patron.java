@@ -1,4 +1,4 @@
-package EmlakProjesi;
+package emlakProjesi;
 
 import java.util.ArrayList;
 import java.util.List;

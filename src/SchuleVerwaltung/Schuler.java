@@ -1,4 +1,4 @@
-package SchuleVerwaltung;
+package schuleVerwaltung;
 
 public class Schuler extends Islemler {
 	

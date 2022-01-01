@@ -1,4 +1,4 @@
-package SchuleVerwaltung;
+package schuleVerwaltung;
 
 import java.util.Iterator;
 

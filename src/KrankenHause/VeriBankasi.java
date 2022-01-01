@@ -1,4 +1,4 @@
-package KrankenHause;
+package krankenHause;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +15,6 @@ public class VeriBankasi {
 		protected static List<String> randevu =new ArrayList<>(Arrays.asList("8","9","10","11","13"));
 		protected static List<VeriBankasi> randevuKayit = new ArrayList<>();
 				 	
-				 
-				 	
 				 	public VeriBankasi(String unvan, String string) {
 						super();
 					}
@@ -28,7 +26,7 @@ public class VeriBankasi {
 				 	}
 
 					public void listeleRandevu(String unvan, String string) {
-						System.out.println("\nBransi        :"+ unvan+"\nRandevu Saati: "+string+"\n");
+						System.out.println("\nBransi       :"+ unvan+"\nRandevu Saati: "+string+"\n");
 						
 					}
 				}

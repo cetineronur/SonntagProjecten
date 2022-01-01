@@ -1,4 +1,4 @@
-package EmlakProjesi;
+package emlakProjesi;
 
 public class Calisan {
 

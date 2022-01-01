@@ -1,4 +1,4 @@
-package SchuleVerwaltung;
+package schuleVerwaltung;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ protected String schulerName;
 	
 	protected String clas;
 	
-	protected int nummer=0;
+	protected static int nummer=0;
 	
 	protected  boolean dongu=true;
 	

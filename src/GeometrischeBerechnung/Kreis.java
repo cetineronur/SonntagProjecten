@@ -1,4 +1,4 @@
-package GeometrischeBerechnung;
+package geometrischeBerechnung;
 
 public class Kreis{
 	

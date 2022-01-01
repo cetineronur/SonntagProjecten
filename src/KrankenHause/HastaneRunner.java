@@ -1,4 +1,4 @@
-package KrankenHause;
+package krankenHause;
 
 import java.util.Calendar;
 import java.util.List;
@@ -113,6 +113,7 @@ public class HastaneRunner extends VeriBankasi{
 				System.out.println("------------------Randevu Bilgileri-----------------");
 				randevuKayit.get(i).listeleRandevu(unvan, randevu.get(i));
 				randevu.set(i, "Dolu");
+				
 				menu1();
 				dongu1=false;
 				break;
