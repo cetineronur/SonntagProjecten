@@ -21,7 +21,7 @@ public class Runner extends Schuler implements Istudenten {
 	private int asistentPassword = 2;
 	private int asistentBenutzerName = 2;
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args)  {
 		System.out.println(
 				"==================================================\n Herzlich Wilkommen Stundent Verwaltung Programme\n==================================================");
 		Runner run = new Runner();

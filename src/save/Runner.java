@@ -1,9 +1,10 @@
 package save;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Runner extends Data {
+public class Runner extends Data implements Idata{
 
 	public static void main(String[] args) {
 
@@ -12,6 +13,7 @@ public class Runner extends Data {
 	}
 
 	private static void menu() {
+		Runner run = new Runner();
 		Scanner scan = new Scanner(System.in);
 		System.out.println("======Lutfen seciminizi yapiniz=======\n1-Anmelden\n2-Information\n3-Remove Data");
 		int secim = 0;
@@ -20,13 +22,13 @@ public class Runner extends Data {
 			switch (secim) {
 
 			case 1:
-				getSave();
+				run.getSave();
 				break;
 			case 2:
-				getInfo();
+				run.getInfo();
 				break;
 			case 3:
-				removeInfo();
+				run.removeInfo();
 				break;
 			default:
 				System.out.println("you made a wrong entry:");
@@ -43,26 +45,27 @@ public class Runner extends Data {
 
 	}
 
-	private static void getSave() {
+	public void getSave() {
 		id();
 		name();
 		adres();
 		tel();
 
 		Data data = new Data();
-		Data data1 = new Data(id, telNummer, adres, name);
-		map.put(id, telNummer + ", " + adres + ", " + name);
+		Data data1 = new Data(data.id, data.getName(),data.getAdres(),data.getTelNummer());
+		map.put(data1.getId(), data1.getName() + ", " + data1.getAdres() + ", " + data1.getTelNummer());
 		System.out.println(map);
 		selectOption();
 
 	}
 
 	private static void selectOption() {
+		Runner run = new Runner();
 		System.out.println("Tekrar kayit eklemek istiyor musunuz?1/2");
 		Scanner scan = new Scanner(System.in);
 		int kayit = scan.nextInt();
 		if (kayit == 1) {
-			getSave();
+			run.getSave();
 		} else {
 			System.out.println();
 			menu();
@@ -70,53 +73,42 @@ public class Runner extends Data {
 
 	}
 
-	private static void tel() {
+	private  void tel() {
 		Data data = new Data();
 		Scanner scan = new Scanner(System.in);
 
-		int tel = 0;
+		
 		System.out.println("Please enter Tel number: ");
-
-		if (scan.hasNextInt()) {
-			tel = scan.nextInt();
-			if (tel < 1000000 || tel > 9999999) {
-				System.out.println("please enter four digit");
-				tel();
-			} else {
-				data.telNummer = tel;
-			}
-		} else if (!scan.hasNextInt()) {
-			System.out.println("please enter integer nummer");
-			tel();
-		}
+		String tel = scan.next();
+		data.setTelNummer(tel);
 
 	}
 
-	private static void adres() {
+	private  void adres() {
 		Data data = new Data();
 		Scanner scan = new Scanner(System.in);
 
-		String adres = null;
+		
 		System.out.println("Please enter your Adresse: ");
-		adres = scan.nextLine();
+		String adres = scan.nextLine();
 		if (adres.length() < 10) {
 			System.out.println("please enter ten krakter ");
 			adres();
 		} else {
-			data.adres = adres;
-		}
+			data.setAdres(adres); 
+			}
 
 	}
 
-	private static void name() {
+	private  void name() {
 		Data data = new Data();
 		Scanner scan = new Scanner(System.in);
 
-		String name = null;
+		
 		System.out.println("Please enter your Name: ");
-		name = scan.next();
+		String name = scan.nextLine();
 		if (name.matches("[a-zA-Z]+")) {
-			data.name = name;
+			data.setName(name);
 		} else {
 			System.out.println("Please enter string data");
 			name();
@@ -124,7 +116,7 @@ public class Runner extends Data {
 
 	}
 
-	private static void id() {
+	private  void id() {
 		Data data = new Data();
 		Scanner scan = new Scanner(System.in);
 
@@ -143,7 +135,7 @@ public class Runner extends Data {
 				id();
 			} else {
 
-				data.id = tc;
+				data.setId(tc);
 			}
 		} else if (!scan.hasNextInt()) {
 			System.out.println("please enter integer nummer");
@@ -151,8 +143,8 @@ public class Runner extends Data {
 		}
 
 	}
-
-	private static void getInfo() {
+	@Override
+	public void getInfo() {
 		if (map.isEmpty()) {
 			System.out.println("database su an bostur");
 			System.out.println();
@@ -165,16 +157,24 @@ public class Runner extends Data {
 		if (map.containsKey(a)) {
 			System.out.println(map.get(a));
 			System.out.println();
+			
+				
+				String[] part = map.get(a).split(", ");
+				System.out.println(a+ " nolu kayit "+  "\nName-Nahname: "+part[0]+"\nAdresse     : "+part[1]+"\nTel Nummer  : "+part[2]);
+			
+			System.out.println();
+			
 			menu();
 		} else {
 			System.out.println("boyle bir kayit bulunmamaktadir");
 			System.out.println();
 			menu();
 		}
+	
 
 	}
-
-	private static void removeInfo() {
+	@Override
+	public void removeInfo() {
 		if (map.isEmpty()) {
 			System.out.println("database su an bostur");
 			System.out.println();
@@ -192,7 +192,7 @@ public class Runner extends Data {
 			System.out.println("boyle bir kayit bulunmamaktadir");
 			System.out.println();
 			menu();
-		}
+		}scan.close();
 
 	}
 
