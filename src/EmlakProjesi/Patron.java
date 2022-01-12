@@ -58,6 +58,7 @@ public class Patron extends KalipHane {
 		
 		System.out.println("Evin fiyatini giriniz:");	
 		setFiyat(scan.nextInt());
+		
 		KalipHane kalip2 = new KalipHane(ilanNo,metre,odaSayisi,bulunduguKat,getFiyat());
 
 		list.add(kalip2);
