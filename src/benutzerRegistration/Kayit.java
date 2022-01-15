@@ -31,6 +31,7 @@ public class Kayit implements Ikayit {
 
 		System.out.println(
 				"=========================================\nLutfen seciminizi yapiniz\n1-Kayit\n2-Id ile Listeleme\n3-Butun kayitlari listeleme\n4-Id ile kayit silme\n5-Kayit Guncelleme\n6-Password guncelleme\n=========================================");
+		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 		int key = scan.nextInt();
 		switch (key) {
@@ -62,33 +63,47 @@ public class Kayit implements Ikayit {
 	}
 
 	private static void passUpdate(Statement st, Connection con) throws ClassNotFoundException, SQLException {
-		Kayit1 kayit = new Kayit1();
+		new Kayit1();
 
-		Kayit1 kayit1 = new Kayit1(kayit.getId(), kayit.getPass(), kayit.getName(), kayit.getnName());
+		new Kayit1(Kayit1.getId(), Kayit1.getPass(), Kayit1.getName(), Kayit1.getnName());
 		System.out.println("Lutfen guncellenecek kayidin idsini giriniz:");
 		int id1 = scan.nextInt();
 
 		ResultSet veri = st.executeQuery("select * from kayit ");
 		PreparedStatement ps = null;
-		boolean dongu = true;
 		while (veri.next()) {
 
 			if (veri.getInt("id") == id1) {
+				boolean dongu=true;
+				int count=0;
+				while(dongu) {
+					System.out.println("Lutfen sifrenizi giriniz");
+					int p=scan.nextInt();
+				if(veri.getInt("pass")==p) {
 				pass(st);
 				ps = con.prepareStatement("update kayit set pass=? where id='" + id1 + "' ;");
-				ps.setInt(1, kayit.getPass());
+				ps.setInt(1, Kayit1.getPass());
 				ps.executeUpdate();
 				System.out.println("Kayit basari ile guncellenmistir.");
 				System.out.println();
 				System.out.println("tekrar guncelleme yapmak istiyor musunuz?E/H");
 				String wahl = scan.next().toUpperCase();
 				if (wahl.equals("E")) {
-					dongu = true;
 				} else {
-					dongu = false;
 					menu();
 				}
-			}
+				}else {
+					count++;
+					if(count==3) {
+						System.out.println("cok fazla yanlis giris yaptiniz");
+						menu();
+					}else {
+						System.out.println("Sifreniz eslesmiyor. ");
+						dongu=true;
+					}
+				}
+				}
+				}
 		}System.out.println("Kayitlarimizda boyle bir id yoktur");
 		passUpdate(st, con);
 		con.close();
@@ -96,26 +111,30 @@ public class Kayit implements Ikayit {
 	}
 
 	private static void kayitUpdate(Statement st, Connection con) throws SQLException, ClassNotFoundException {
-		Kayit1 kayit = new Kayit1();
+		new Kayit1();
 
-		Kayit1 kayit1 = new Kayit1(kayit.getId(), kayit.getPass(), kayit.getName(), kayit.getnName());
+		new Kayit1(Kayit1.getId(), Kayit1.getPass(), Kayit1.getName(), Kayit1.getnName());
 		System.out.println("Lutfen guncellenecek kayidin idsini giriniz:");
 		int id1 = scan.nextInt();
 
 		ResultSet veri = st.executeQuery("select * from kayit ");
 		PreparedStatement ps = null;
-		boolean dongu = true;
 		while (veri.next()) {
 
-			if (veri.getInt("id") == id1) {
-
+		if (veri.getInt("id") == id1) {
+			boolean dongu=true;
+			int count=0;
+			while(dongu) {
+				System.out.println("Lutfen sifrenizi giriniz");
+				int p=scan.nextInt();
+			if(veri.getInt("pass")==p) {
 				pass(st);
 				name(st);
 				nNahme(st);
 				ps = con.prepareStatement("update kayit set pass=?,name=?,nName=? where id=?");
-				ps.setInt(1, kayit.getPass());
-				ps.setString(2, kayit.getName());
-				ps.setString(3, kayit.getnName());
+				ps.setInt(1, Kayit1.getPass());
+				ps.setString(2, Kayit1.getName());
+				ps.setString(3, Kayit1.getnName());
 				ps.setInt(4, id1);
 				ps.executeUpdate();
 				System.out.println("Kayit basari ile guncellenmistir.");
@@ -123,12 +142,20 @@ public class Kayit implements Ikayit {
 				System.out.println("tekrar guncelleme yapmak istiyor musunuz?E/H");
 				String wahl = scan.next().toUpperCase();
 				if (wahl.equals("E")) {
-					dongu = true;
 				} else {
-					dongu = false;
 					menu();
 				}
-
+			}else {
+				count++;
+				if(count==3) {
+					System.out.println("cok fazla yanlis giris yaptiniz");
+					menu();
+				}else {
+					System.out.println("Sifreniz eslesmiyor. ");
+					dongu=true;
+				}
+			}
+			}
 			}
 		}System.out.println("Kayitlarimizda boyle bir id yoktur");
 		kayitUpdate(st, con);
@@ -139,29 +166,28 @@ public class Kayit implements Ikayit {
 
 	public static void kayit(Statement st, Connection con) throws SQLException, ClassNotFoundException {
 
-		Kayit1 kayit = new Kayit1();
+		new Kayit1();
 
-		Kayit1 kayit1 = new Kayit1(kayit.getId(), kayit.getPass(), kayit.getName(), kayit.getnName());
+		new Kayit1(Kayit1.getId(), Kayit1.getPass(), Kayit1.getName(), Kayit1.getnName());
 
-		PreparedStatement ps = null; // veritabanina gonderilecek bilgileri bu nesne tutacak ve gonderecek
-		int i = 0;
-		String sorgu = "CREATE TABLE kayit" + " (id int ," + " pass int," + " name  varchar(10),"
-				+ " nName varchar(10))";
-		st.execute(sorgu);
+		//PreparedStatement ps = null; // veritabanina gonderilecek bilgileri bu nesne tutacak ve gonderecek
+		
+		st.execute("CREATE TABLE kayit" + " (id int ," + " pass int," + " name  varchar(10),"
+				+ " nName varchar(10))");
 		boolean dongu = true;
 		while (dongu) {
-			kayit.id++;
+			Kayit1.id++;
 			
 			name(st);
 			nNahme(st);
 			pass(st);
-			ps = con.prepareStatement("insert into kayit(id,pass,name,nName)values(?,?,?,?)");// kayit veritabanina veri
+			PreparedStatement	ps = con.prepareStatement("insert into kayit(id,pass,name,nName)values(?,?,?,?)");// kayit veritabanina veri
 																								// gonderecegimi
 																								// soyluyorum.
-			ps.setInt(1, kayit.getId()); // ps nesnesine gelen id yi kayit etti.
-			ps.setInt(2, kayit.getPass());
-			ps.setString(3, kayit.getName());
-			ps.setString(4, kayit.getnName());
+			ps.setInt(1, Kayit1.getId()); // ps nesnesine gelen id yi kayit etti.
+			ps.setInt(2, Kayit1.getPass());
+			ps.setString(3, Kayit1.getName());
+			ps.setString(4, Kayit1.getnName());
 			ps.executeUpdate();// sorguyu calistirir ve 0 dan buyukse kayit basarili olur.
 			System.out.println("Kayit basari ile yapilmistir.\ntekrar giris yapmak istiyor musunuz?E/H");
 			String wahl = scan.next().toUpperCase();
@@ -180,43 +206,43 @@ public class Kayit implements Ikayit {
 
 	private static String nNahme(Statement st) throws SQLException {
 
-		Kayit1 kayit = new Kayit1();
+		new Kayit1();
 
 		System.out.print("Please enter your surName: ");
-		kayit.setnName(scan.next());
-		if (kayit.getnName().matches("[a-zA-Z]+")) {
-			kayit.setnName(kayit.getnName());
+		Kayit1.setnName(scan.next());
+		if (Kayit1.getnName().matches("[a-zA-Z]+")) {
+			Kayit1.setnName(Kayit1.getnName());
 		} else {
 			System.out.println("Please enter string data");
 			nNahme(st);
 		}
-		return kayit.getnName();
+		return Kayit1.getnName();
 
 	}
 
 	private static String name(Statement st) throws SQLException {
-		Kayit1 kayit = new Kayit1();
+		new Kayit1();
 		System.out.print("Please enter your Name: ");
 		
-		kayit.setName(scan.next());
+		Kayit1.setName(scan.next());
 
-		if (kayit.getName().matches("[a-zA-Z]+")) {
-			kayit.setName(kayit.getName());
+		if (Kayit1.getName().matches("[a-zA-Z]+")) {
+			Kayit1.setName(Kayit1.getName());
 		} else {
 			System.out.println("Please enter string data");
 			name(st);
 		}
-		return kayit.getName();
+		return Kayit1.getName();
 
 	}
 
 	private static int pass(Statement st) throws SQLException {
-		Kayit1 kayit = new Kayit1();
+		new Kayit1();
 		System.out.print("please create your four digit password:");
-		kayit.setPass(0);
+		Kayit1.setPass(0);
 		if (scan.hasNextInt()) {
-			kayit.setPass(scan.nextInt());
-			if (kayit.getPass() < 1000 || kayit.getPass() > 9999) {
+			Kayit1.setPass(scan.nextInt());
+			if (Kayit1.getPass() < 1000 || Kayit1.getPass() > 9999) {
 				System.out.println("please enter four digit");
 				pass(st);
 			}
@@ -224,7 +250,7 @@ public class Kayit implements Ikayit {
 			System.out.println("please enter integer nummer");
 			pass(st);
 		}
-		return kayit.getPass();
+		return Kayit1.getPass();
 
 	}
 
